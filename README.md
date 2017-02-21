@@ -17,3 +17,4 @@ In order to run SceneVR locally, enable cross-origin resource sharing. (Recommen
 $ npm install
 $ npm start
 ```
+Run on localhost:3000.

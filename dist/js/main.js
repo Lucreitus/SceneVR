@@ -264,6 +264,7 @@
 	    templateData.images.forEach((img, i) => {
 	      let skyEl = dom.createElement('img', `sky-${i}`, ['sky']);
 	      skyEl.setAttribute('src', img.path);
+	      skyEl.setAttribute('crossorigin', "anonymous");
 	      assets.appendChild(skyEl);
 
 	      let thumbnailEl = dom.createElement('img', `thumbnail-${i}`, ['thumbnail', `${i === 0 ? "selected-thumbnail" : ""}`]);
@@ -274,6 +275,7 @@
 	    return scene;
 	  }
 	}
+
 
 /***/ },
 /* 6 */

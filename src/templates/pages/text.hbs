@@ -1,0 +1,36 @@
+---
+title: Scene
+title_suffix: VR
+path: "https://cdn.knightlab.com/libs/orangeline/latest/"
+css_file: "../../css/scene.css"
+intro: Easy-to-make VR stories.
+site_name: Scene VR
+main_image: "https://cdn.knightlab.com/libs/orangeline/latest/assets/screenshot-timeline.png"
+description: Easy-to-make, VR stories.
+twitter_site: "@knightlab"
+twitter_author: "@knightlab"
+page_url: "https://scene.knightlab.com"
+keywords: "story, news, vr, create, twitter, journalism, virtual reality, google cardboard"
+---
+{{partials 'head' this }}
+
+<body>
+  <head>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  </head>
+    <a-scene>
+      <a-assets>
+        <img id="skyTexture"
+          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+          <a-asset-item id="dejavu" src="https://cdn.aframe.io/fonts/DejaVu-sdf.fnt"></a-asset-item>
+
+      </a-assets>
+      <a-sky src="#skyTexture"></a-sky>
+      <!-- <a-entity text="value: Hello World;"></a-entity> -->
+      <a-text value="After visiting the museum, I thought of my first sight of Qatar, just before landing at Doha. The vastness of the landscape of sand, lit by a strip of orange light as the sun rose, held mystery, promise and memories from fabled stories." position="-9 5 -10" rotation="0 0 0" scale="3 3 3"></a-text>
+      <a-text value="After visiting the museum, I thought of my first sight of Qatar, just before landing at Doha. The vastness of the landscape of sand, lit by a strip of orange light as the sun rose, held mystery, promise and memories from fabled stories." position="0 -4 -10" rotation="0 0 0" scale="3 3 3"></a-text>
+
+
+    </a-scene>
+    <!-- <script type="text/javascript" src="../../js/main.js"></script> -->
+</body>

@@ -21,16 +21,27 @@ keywords: "story, news, vr, create, twitter, journalism, virtual reality, google
     <a-scene>
       <a-assets>
         <img id="skyTexture"
-          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+          src="https://c1.staticflickr.com/3/2902/33983673332_d8966e32c9_f.jpg">
         <a-asset-item id="dejavu" src="https://cdn.aframe.io/fonts/DejaVu-sdf.fnt"></a-asset-item>
       </a-assets>
       <a-sky src="#skyTexture"></a-sky>
-      <!-- <a-entity text="value: Hello World;"></a-entity> -->
-      <a-text value="After visiting the museum, I thought of my first sight of Qatar, just before landing at Doha. The vastness of the landscape of sand, lit by a strip of orange light as the sun rose, held mystery, promise and memories from fabled stories." position="-9 5 -10" rotation="0 0 0" scale="3 3 3"></a-text>
-      <a-text value="After visiting the museum, I thought of my first sight of Qatar, just before landing at Doha. The vastness of the landscape of sand, lit by a strip of orange light as the sun rose, held mystery, promise and memories from fabled stories." position="-7 -2.58 -19" rotation="-7 0 0" scale="3 3 3"></a-text>
-      <a-text value="After visiting the museum, I thought of my first sight of Qatar, just before landing at Doha. The vastness of the landscape of sand, lit by a strip of orange light as the sun rose, held mystery, promise and memories from fabled stories." position="-20 0 9" rotation="0 120 0" scale="4 4 4"></a-text>
-      <a-text value="After visiting the museum, I thought of my first sight of Qatar, just before landing at Doha. The vastness of the landscape of sand, lit by a strip of orange light as the sun rose, held mystery, promise and memories from fabled stories." position="-6.04 2.91 31.67" rotation="-10.00 120.00 0" scale="4 4 4"></a-text>
+      <!-- PRE-HELMET STUFF -->
 
+      <!-- <a-text value="It’s incredible how clear the skies are in Doha. The city has a population of over 2.6 million. Ten years ago, it had a population of 800,000. Crazy to think that we’re living in a time to see a great city in the making." color = "white" position="-7 -2.58 -19" rotation="-7 0 0" scale="3 3 3"></a-text>
+      <a-text value="It’s incredible how clear the skies are in Doha. The city has a population of over 2.6 million. Ten years ago, it had a population of 800,000. Crazy to think that we’re living in a time to see a great city in the making." color = "black" position="-7 -2.58 -19" rotation="-7 0 0" scale="3 3 3"></a-text>
+      <a-text value="We're in Doha! After an exhausting 14 hour flight, we finally check into our hotel. I remember dropping my bags in the lobby and just taking it all in - the marbled floors, multiple chandeliers, and cool lounge music. I wish we had the energy for a hotel tour, but we were ready for bed." color = "white" position="-23 2.662 9.000" rotation="0 120 0" scale="3 3 3"></a-text>
+      <a-text value="We're in Doha! After an exhausting 14 hour flight, we finally check into our hotel. I remember dropping my bags in the lobby and just taking it all in - the marbled floors, multiple chandeliers, and cool lounge music. I wish we had the energy for a hotel tour, but we were ready for bed." color = "black" position="-23 2.662 9.000" rotation="0 120 0" scale="3 3 3"></a-text> -->
+
+      <!-- HELMET VIEW  -->
+
+      <!-- make it a child of the camera  -->
+      <a-entity camera="userHeight: 1.6" look-controls></a-entity>
+      <a-entity camera look-controls>
+        <a-entity geometry="primitive: plane; height: 0.2; width: 0.2" position="0 0 -1"
+            material="color: gray; opacity: 0.5"></a-entity>
+          </a-entity>
+      <a-text value="It’s incredible how clear the skies are in Doha. The city has a population of over 2.6 million. Ten years ago, it had a population of 800,000. Crazy to think that we’re living in a time to see a great city in the making." color = "white" position="-26.000 10 -16" rotation="7 75 0" scale="4 4 4"></a-text>
+      <!-- <a-text value="Doha, Qatar" color = "black" position="10 -8 -14.473" rotation="0 0 0" scale="4 4 4"></a-text> -->
     </a-scene>
     <!-- <script type="text/javascript" src="../../js/main.js"></script> -->
 </body>

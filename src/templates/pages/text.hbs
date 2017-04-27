@@ -24,26 +24,54 @@ keywords: "story, news, vr, create, twitter, journalism, virtual reality, google
           src="https://c1.staticflickr.com/3/2902/33983673332_d8966e32c9_f.jpg">
         <a-asset-item id="dejavu" src="https://cdn.aframe.io/fonts/DejaVu-sdf.fnt"></a-asset-item>
       </a-assets>
-      <a-sky src="#skyTexture"></a-sky>
+      <a-sky src="#skyTexture">
+        <a-animation id="fade-out" attribute="material.opacity" begin="fadeOut" from="1" to="0"></a-animation>
+        <a-animation id="fade-in" attribute="material.opacity" begin="fadeIn" from="0" to="1"></a-animation>
+      </a-sky>
       <!-- PRE-HELMET STUFF -->
-
       <!-- <a-text value="It’s incredible how clear the skies are in Doha. The city has a population of over 2.6 million. Ten years ago, it had a population of 800,000. Crazy to think that we’re living in a time to see a great city in the making." color = "white" position="-7 -2.58 -19" rotation="-7 0 0" scale="3 3 3"></a-text>
       <a-text value="It’s incredible how clear the skies are in Doha. The city has a population of over 2.6 million. Ten years ago, it had a population of 800,000. Crazy to think that we’re living in a time to see a great city in the making." color = "black" position="-7 -2.58 -19" rotation="-7 0 0" scale="3 3 3"></a-text>
       <a-text value="We're in Doha! After an exhausting 14 hour flight, we finally check into our hotel. I remember dropping my bags in the lobby and just taking it all in - the marbled floors, multiple chandeliers, and cool lounge music. I wish we had the energy for a hotel tour, but we were ready for bed." color = "white" position="-23 2.662 9.000" rotation="0 120 0" scale="3 3 3"></a-text>
       <a-text value="We're in Doha! After an exhausting 14 hour flight, we finally check into our hotel. I remember dropping my bags in the lobby and just taking it all in - the marbled floors, multiple chandeliers, and cool lounge music. I wish we had the energy for a hotel tour, but we were ready for bed." color = "black" position="-23 2.662 9.000" rotation="0 120 0" scale="3 3 3"></a-text> -->
 
-<!-- as a child of the text element, add a fade out thing
-template js animate
-ui.js
-select fading input ui.js
-emit
-timeOut
-set time out in ui.js -->
+      <!--
+      fade out is a child of the text element
+      listener for when the sky has faded in to trigger text to fade in
+      then a timer for 10 seconds
+      then text to fade out
+      -->
 
       <!-- HELMET VIEW  -->
       <a-entity camera="userHeight: 1.6" look-controls></a-entity>
       <a-entity camera look-controls>
-        <a-text value="It is incredible how clear the skies are in Doha. The city has a population of over 2.6 million. Ten years ago, it had a population of 800,000. Crazy to think that we’re living in a time to see a great city in the making." color = "white" position="-3 3 -6" rotation="0 0 0" scale="1 1 1"></a-text>
+        <a-text opacity="0" value="It is incredible how clear the skies are in Doha. The city has a population of over 2.6 million. Ten years ago, it had a population of 800,000. Crazy to think that we’re living in a time to see a great city in the making." color = "white" position="-3 3 -6" rotation="0 0 0" scale="1 1 1">
+          <a-animation id="fade-out" attribute="opacity" begin="fadeOut" from="1" to="0"></a-animation>
+          <a-animation id="fade-in" attribute="opacity" begin="fadeIn" from="0" to="1"></a-animation>
+        </a-text>
       </a-entity>
     </a-scene>
+
+
+  <script>
+    // window.onload = () => {
+    //   console.log('page loaded');
+    //   setTimeout(function() {
+    //     document.querySelector("a-sky #fade-out").emit("fadeOut");
+    //     console.log('it\s been five seconds')
+    //   }, 5000)
+    // }
+
+    window.onload = () => {
+      console.log('page loaded');
+      setTimeout(function() {
+        document.querySelector("a-text #fade-in").emit("fadeIn");
+        console.log('it\s been two seconds, come outside!')
+      }, 2000)
+      setTimeout(function() {
+        document.querySelector("a-text #fade-out").emit("fadeOut");
+        console.log('it\s been twelve seconds')
+      }, 12000)
+    }
+  </script>
+
 </body>

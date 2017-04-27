@@ -6,11 +6,103 @@ body {
     line-height: $font-line-height;
 }
 
+body.desktop {
+    #thumbnails-container {
+        #thumbnails {
+            position: absolute;
+            left    : -100vw;
+        }
+
+        .thumbnail {
+            max-width: 20vw;
+            margin   : 0 1vw 3vh 0;
+        }
+    }
+}
+
+body.mobile {
+    #ui {
+        #footer {
+            height: 20%;
+        }
+
+        #next {
+            top: 35vh;
+        }
+
+        #fullscreen {
+            bottom: 15vh;
+            height: 7vh;
+            width: 7vh;
+        }
+
+        #compass-container {
+            top: 3vh;
+            #compass {
+                height: 6vh;
+                width: 6vh;
+            }
+        }
+
+        #thumbnails-container {
+            top: 3vh;
+    
+            #thumbnails-icon {
+                height: 6vh;
+                width: 6vh;
+            }
+
+            #thumbnails {
+                position: absolute;
+                left    : -200vw;
+                height  : 60vh;
+            }
+
+            .thumbnail {
+                max-width: 40vw;
+                margin   : 0 3vw 5vh 0;
+            }
+        }
+    }
+}
+
+body.modal {
+    a-scene {
+        opacity: 0.25;
+    }
+
+    #ui {
+        #next, #fullscreen, #compass {
+            opacity: 0;
+        }
+
+        #thumbnails-container {
+            pointer-events: none;
+
+            #thumbnails-icon {
+                pointer-events: auto;
+            }
+
+            #thumbnails {
+                position      : static;
+                opacity       : 1;
+                pointer-events: auto;
+            }
+        }
+    }
+}
+
 #rendered-template {
     opacity: 0;
+
+    a-scene {
+        transition: opacity 0.5s;
+    }
+
     #ui {
-        width : 100vw;
-        height: 100vh;
+        opacity: 1;
+        width  : 100vw;
+        height : 100vh;
     }
 
     #black-background {
@@ -30,7 +122,7 @@ body {
     }
     #fullscreen {
         position: fixed;
-        top     : 75vh;
+        bottom     : 10vh;
         right   : 2vw;
         cursor  : pointer;
         height  : 10%;
@@ -84,7 +176,7 @@ body {
 
     #footer-content {
         color     : $color-grey--lightest;
-        width     : 50%;
+        width     : 100%;
         overflow-y: auto;
         font-size: 14px;
         line-height:18px;
@@ -99,18 +191,30 @@ body {
         }
     }
 
+    #thumbnails-container {
+        position: fixed;
+        top     : 5vh;
+        left    : 3vw;
+    }
+
+    #thumbnails-icon {
+        cursor    : pointer;
+        transition: opacity 0.5s;
+        height    : 8vh;
+        width     : 8vh;
+    }
+
     #thumbnails {
-        width      : 50%;
-        padding    : 10px;
-        display    : flex;
-        align-items: center;
+        padding       : 10px;
+        opacity       : 0;
+        pointer-events: none;
+        transition    : opacity 0.5s;
+        overflow-y    : auto;
     }
 
     .thumbnail {
-        max-height  : 7.5vh;
-        max-width   : 150px;
-        margin      : 0 1vw 0 0;
-        cursor      : pointer;
+        cursor : pointer;
+        display: inline-block;
     }
 
     .selected-thumbnail {

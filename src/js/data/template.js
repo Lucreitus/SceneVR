@@ -6,30 +6,19 @@ module.exports = {
       </a-assets>
       <a-entity id="camera" camera look-controls="reverse-mouse-drag:true">
         <a-entity id="cursor"
-          cursor="fuse: true; fuseTimeout:4500;"
-          raycaster="objects: .orb"
+          cursor="fuse: true; fuseTimeout:1000;"
+          raycaster="objects: none"
           position="0.0 0.0 -0.45" geometry="primitive: ring; radius-inner: 0.005; radius-outer: 0.01; thetaLength: 360"
           material="color: #D3D3D3" visible="false">
             <a-animation  begin="fusing" end="stop-loading" easing="ease-in" attribute="geometry.thetaLength"
-            dur=4500 from="360" to="0"></a-animation>
+            dur=1000 from="360" to="0"></a-animation>
             <a-animation  begin="rewind" easing="ease-in" attribute="geometry.thetaLength"
             to="360"></a-animation>
             <a-animation  begin="click" easing="ease-in" attribute="geometry.thetaLength"
             dur=500 from="0" to="360"></a-animation>
         </a-entity>
       </a-entity>
-      <a-entity id="back-orb-entity" position="-0.5 -0.6 -0.5" rotation="0 0 0" class="not-selectable" opacity="0" visible="false">
-        <a-sky id="back-orb" radius=0.25 phi-start=0 phi-length=360 opacity=1>
-          <a-animation begin="mouseenter" dur=4000 attribute="rotation" to="0 360 0"fill="none"></a-animation>
-        </a-sky>
-      </a-entity>
-      <a-entity id="next-orb-entity" position="0.5 -0.6 -0.5" rotation="0 0 0" class="not-selectable" visible="false">
-        <a-sky id="next-orb" radius=0.25 phi-start=0 phi-length=360 opacity=1>
-          <a-animation begin="mouseenter" dur=4000 attribute="rotation" to="0 360 0" fill="none"></a-animation>
-          <a-animation id="fade-out-next" attribute="material.opacity" begin="fadeOutNext" to="0"></a-animation>
-          <a-animation id="fade-in-next" attribute="material.opacity" begin="fadeInNext" to="1"></a-animation>
-        </a-sky>
-      </a-entity>
+      <a-entity id="vr-thumbnails" visible="false"></a-entity>
       <a-sky id="skybox" src="#sky-0">
         <a-animation id="fade-out" attribute="material.opacity" begin="fadeOut" from="1" to="0"></a-animation>
         <a-animation id="fade-in" attribute="material.opacity" begin="fadeIn" from="0" to="1"></a-animation>
@@ -40,6 +29,10 @@ module.exports = {
       <img id="next" src="/assets/chevron-right.svg">
       <img id="cardboard" src="/assets/google-cardboard.svg">
       <img id="fullscreen" src="/assets/fullscreen.svg">
+      <div id="thumbnails-container">
+        <img id="thumbnails-icon" src="/assets/thumbnails.svg">
+        <div id="thumbnails"></div>
+      </div>
       <div id="compass-container">
         <svg id="compass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 334.47 334.47">
           <title>Compass</title>
@@ -51,8 +44,6 @@ module.exports = {
       <div id="footer">
         <div id="footer-content">
         </div>
-        <div id="thumbnails">
-        </div>
       </div>
     </div>`,
     buildTemplate: (templateData) => {
@@ -61,7 +52,9 @@ module.exports = {
         scene.innerHTML = module.exports.template
         let assets = scene.querySelector('a-assets');
         let thumbnails = scene.querySelector('#thumbnails');
+        let vrThumbnails = scene.querySelector('#vr-thumbnails');
         let aScene = scene.querySelector('a-scene');
+        const scenesLength = templateData.images.length;
 
         let backgroundText = dom.createElement('a-entity', 'background-text', []);
         backgroundText.setAttribute('geometry', 'primitive: plane; height: 0.6; width: 2.2');
@@ -80,6 +73,22 @@ module.exports = {
             let thumbnailEl = dom.createElement('img', `thumbnail-${i}`, ['thumbnail', `${i === 0 ? 'selected-thumbnail' : ''}`]);
             thumbnailEl.setAttribute('src', img.thumbnailPath);
             thumbnails.appendChild(thumbnailEl);
+
+            let vrThumbnailEl = dom.createElement('a-image', `vr-thumbnail-${i}`, ['vr-thumbnail', `${i === 0 ? 'current-vr-thumbnail' : ''}`]);
+            vrThumbnailEl.setAttribute('src', img.thumbnailPath);
+            vrThumbnailEl.setAttribute('width', 0.25);
+            vrThumbnailEl.setAttribute('height', 0.25);
+            vrThumbnailEl.setAttribute('look-at', '[camera]');
+            // vrThumbnailEl.setAttribute('shader', 'standard');
+
+            // a from 0 to 1, -1.5 + 3a, x ranges from -1.5 to 1.5
+            const xPosition = -1.5 + (i / (scenesLength - 1)) * 3;
+            // a from 0 to 1, (0.5^2 - (a - 0.5)^2)^0.5
+            const z = (i / (scenesLength - 1));
+            let zPosition = -Math.sqrt(Math.pow(0.5, 2) - Math.pow(z - 0.5, 2));
+            vrThumbnailEl.setAttribute('position', `${xPosition} -0.6 ${zPosition}`);
+
+            vrThumbnails.appendChild(vrThumbnailEl);
 
             let textEl = dom.createElement('a-entity', `text-${i}`, ['text', `${i === 0 ? 'current-text' : ''}`]);
             textEl.setAttribute('geometry', 'primitive: plane; height: 0.3; width: 1');

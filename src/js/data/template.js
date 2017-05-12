@@ -32,8 +32,8 @@ module.exports = {
       <div id="black-background"></div>
       <img id="cardboard" src="/assets/google-cardboard.svg">
       <img id="fullscreen" src="/assets/fullscreen.svg">
+      <img id="thumbnail-icons-close" src="/assets/close.svg"/>
       <div id="thumbnail-icons">
-        <img id="thumbnail-icons-close" src="/assets/close.svg"/>
         <div id="thumbnail-icons-stack"></div>
       </div>
       <div id="thumbnails-container">
